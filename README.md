@@ -31,7 +31,7 @@ HeadLib.WOODEN_EXCLAMATION_MARK.give(player, ChatColor.DARK_RED + "Item Display 
         <dependency>
             <groupId>de.erethon</groupId>
             <artifactId>headlib</artifactId>
-            <version>1.0</version>
+            <version>1.1</version>
         </dependency>
     </dependencies>
     <repositories>

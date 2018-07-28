@@ -348,34 +348,106 @@ public enum HeadLib {
         skullOwner.set("Properties", properties);
     }
 
+    /**
+     * Gives an ItemStack of the size 1 of the custom head to a player.
+     *
+     * @param player
+     * the player
+     */
     public void give(Player player) {
         player.getInventory().addItem(new ItemStack[]{toItemStack()});
     }
 
+    /**
+     * Gives an ItemStack of the custom head to a player.
+     *
+     * @param player
+     * the player
+     * @param amount
+     * the amount of items in the stack to give
+     */
     public void give(Player player, int amount) {
         player.getInventory().addItem(new ItemStack[]{toItemStack(amount)});
     }
 
+    /**
+     * Gives an ItemStack of the size 1 of the custom head to a player.
+     *
+     * @param player
+     * the player
+     * @param displayName
+     * the name to display. Supports "&amp;" color codes
+     * @param loreLines
+     * optional lore lines. Supports "&amp;" color codes
+     */
     public void give(Player player, String displayName, String... loreLines) {
         player.getInventory().addItem(new ItemStack[]{toItemStack(displayName, loreLines)});
     }
 
+    /**
+     * Gives an ItemStack of the size 1 of the custom head to a player.
+     *
+     * @param player
+     * the player
+     * @param amount
+     * the amount of items in the stack to give
+     * @param displayName
+     * the name to display. Supports "&amp;" color codes
+     * @param loreLines
+     * optional lore lines. Supports "&amp;" color codes
+     */
     public void give(Player player, int amount, String displayName, String... loreLines) {
         player.getInventory().addItem(new ItemStack[]{toItemStack(amount, displayName, loreLines)});
     }
 
+    /**
+     * Returns an ItemStack of the size 1 of the custom head.
+     *
+     * @return
+     * an ItemStack of the custom head.
+     */
     public ItemStack toItemStack() {
         return toItemStack(1);
     }
 
+    /**
+     * Returns an ItemStack of the custom head.
+     *
+     * @param amount
+     * the amount of items in the stack
+     * @return
+     * an ItemStack of the custom head.
+     */
     public ItemStack toItemStack(int amount) {
         return toItemStack(amount, null);
     }
 
+    /**
+     * Returns an ItemStack of the size 1 of the custom head.
+     *
+     * @param displayName
+     * the name to display. Supports "&amp;" color codes
+     * @param loreLines
+     * optional lore lines. Supports "&amp;" color codes
+     * @return
+     * an ItemStack of the custom head.
+     */
     public ItemStack toItemStack(String displayName, String... loreLines) {
         return toItemStack(1, displayName, loreLines);
     }
 
+    /**
+     * Returns an ItemStack of the custom head.
+     *
+     * @param amount
+     * the amount of items in the stack
+     * @param displayName
+     * the name to display. Supports "&amp;" color codes
+     * @param loreLines
+     * optional lore lines. Supports "&amp;" color codes
+     * @return
+     * an ItemStack of the custom head.
+     */
     public ItemStack toItemStack(int amount, String displayName, String... loreLines) {
         ItemStack item = new ItemStack(Material.PLAYER_HEAD, amount);
 
