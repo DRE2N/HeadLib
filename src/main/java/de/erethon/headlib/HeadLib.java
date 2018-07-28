@@ -12,10 +12,13 @@
  */
 package de.erethon.headlib;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import net.minecraft.server.v1_13_R1.NBTTagCompound;
 import net.minecraft.server.v1_13_R1.NBTTagList;
 import net.minecraft.server.v1_13_R1.NBTTagString;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_13_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
@@ -376,10 +379,16 @@ public enum HeadLib {
     public ItemStack toItemStack(int amount, String displayName, String... loreLines) {
         ItemStack item = new ItemStack(Material.PLAYER_HEAD, amount);
 
-        ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(displayName);
-        meta.setLore(Arrays.asList(loreLines));
-        item.setItemMeta(meta);
+        if (displayName != null) {
+            ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', displayName));
+            if (loreLines.length != 0) {
+                List<String> loreCC = new ArrayList<>();
+                Arrays.stream(loreLines).forEach(l -> loreCC.add(ChatColor.translateAlternateColorCodes('&', l)));
+                meta.setLore(loreCC);
+            }
+            item.setItemMeta(meta);
+        }
 
         net.minecraft.server.v1_13_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
         NBTTagCompound compound = nmsStack.getTag() != null ? nmsStack.getTag() : new NBTTagCompound();
