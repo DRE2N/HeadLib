@@ -393,6 +393,7 @@ public enum HeadLib {
         net.minecraft.server.v1_13_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
         NBTTagCompound compound = nmsStack.getTag() != null ? nmsStack.getTag() : new NBTTagCompound();
         compound.set("SkullOwner", skullOwner);
+        nmsStack.setTag(compound);
         return CraftItemStack.asBukkitCopy(nmsStack);
     }
 
