@@ -333,10 +333,20 @@ public enum HeadLib {
     ANIMAL_SQUID("f95d9504-ea2b-4b89-b2d0-d400654a7010", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMDE0MzNiZTI0MjM2NmFmMTI2ZGE0MzRiODczNWRmMWViNWIzY2IyY2VkZTM5MTQ1OTc0ZTljNDgzNjA3YmFjIn19fQ=="),
     ANIMAL_MOOSHROOM("e206ac29-ae69-475b-909a-fb523d894336", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDBiYzYxYjk3NTdhN2I4M2UwM2NkMjUwN2EyMTU3OTEzYzJjZjAxNmU3YzA5NmE0ZDZjZjFmZTFiOGRiIn19fQ==");
 
+    private String uuid;
+    private String textureValue;
     private Object skullOwner;
 
     HeadLib(String uuid, String textureValue) {
-        skullOwner = createOwnerCompound(uuid, textureValue);
+        this.uuid = uuid;
+        this.textureValue = textureValue;
+    }
+
+    private Object getSkullOwner() {
+        if (skullOwner == null) {
+            skullOwner = internals.createOwnerCompound(uuid, textureValue);
+        }
+        return skullOwner;
     }
 
     /**
@@ -433,7 +443,7 @@ public enum HeadLib {
             item.setItemMeta(meta);
         }
 
-        return internals.setSkullOwner(item, skullOwner);
+        return internals.setSkullOwner(item, getSkullOwner());
     }
 
     static interface InternalsProvider {
@@ -456,10 +466,6 @@ public enum HeadLib {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException exception) {
             Bukkit.getLogger().log(Level.SEVERE, "ItemUtil could not find a valid implementation for " + internalsName + ".");
         }
-    }
-
-    private static Object createOwnerCompound(String id, String textureValue) {
-        return internals.createOwnerCompound(id, textureValue);
     }
 
     /**
