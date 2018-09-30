@@ -15,12 +15,11 @@ package de.erethon.headlib;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import net.minecraft.server.v1_13_R2.NBTTagCompound;
-import net.minecraft.server.v1_13_R2.NBTTagList;
-import net.minecraft.server.v1_13_R2.NBTTagString;
+import java.util.UUID;
+import java.util.logging.Level;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_13_R2.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -334,25 +333,16 @@ public enum HeadLib {
     ANIMAL_SQUID("f95d9504-ea2b-4b89-b2d0-d400654a7010", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMDE0MzNiZTI0MjM2NmFmMTI2ZGE0MzRiODczNWRmMWViNWIzY2IyY2VkZTM5MTQ1OTc0ZTljNDgzNjA3YmFjIn19fQ=="),
     ANIMAL_MOOSHROOM("e206ac29-ae69-475b-909a-fb523d894336", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDBiYzYxYjk3NTdhN2I4M2UwM2NkMjUwN2EyMTU3OTEzYzJjZjAxNmU3YzA5NmE0ZDZjZjFmZTFiOGRiIn19fQ==");
 
-    private NBTTagCompound skullOwner;
+    private Object skullOwner;
 
     HeadLib(String uuid, String textureValue) {
-        skullOwner = new NBTTagCompound();
-        skullOwner.set("Id", new NBTTagString(uuid));
-        NBTTagCompound properties = new NBTTagCompound();
-        NBTTagList textures = new NBTTagList();
-        NBTTagCompound value = new NBTTagCompound();
-        value.set("Value", new NBTTagString(textureValue));
-        textures.add(value);
-        properties.set("textures", textures);
-        skullOwner.set("Properties", properties);
+        skullOwner = createOwnerCompound(uuid, textureValue);
     }
 
     /**
      * Gives an ItemStack of the size 1 of the custom head to a player.
      *
-     * @param player
-     * the player
+     * @param player the player
      */
     public void give(Player player) {
         player.getInventory().addItem(new ItemStack[]{toItemStack()});
@@ -361,10 +351,8 @@ public enum HeadLib {
     /**
      * Gives an ItemStack of the custom head to a player.
      *
-     * @param player
-     * the player
-     * @param amount
-     * the amount of items in the stack to give
+     * @param player the player
+     * @param amount the amount of items in the stack to give
      */
     public void give(Player player, int amount) {
         player.getInventory().addItem(new ItemStack[]{toItemStack(amount)});
@@ -373,12 +361,9 @@ public enum HeadLib {
     /**
      * Gives an ItemStack of the size 1 of the custom head to a player.
      *
-     * @param player
-     * the player
-     * @param displayName
-     * the name to display. Supports "&amp;" color codes
-     * @param loreLines
-     * optional lore lines. Supports "&amp;" color codes
+     * @param player      the player
+     * @param displayName the name to display. Supports "&amp;" color codes
+     * @param loreLines   optional lore lines. Supports "&amp;" color codes
      */
     public void give(Player player, String displayName, String... loreLines) {
         player.getInventory().addItem(new ItemStack[]{toItemStack(displayName, loreLines)});
@@ -387,14 +372,10 @@ public enum HeadLib {
     /**
      * Gives an ItemStack of the size 1 of the custom head to a player.
      *
-     * @param player
-     * the player
-     * @param amount
-     * the amount of items in the stack to give
-     * @param displayName
-     * the name to display. Supports "&amp;" color codes
-     * @param loreLines
-     * optional lore lines. Supports "&amp;" color codes
+     * @param player      the player
+     * @param amount      the amount of items in the stack to give
+     * @param displayName the name to display. Supports "&amp;" color codes
+     * @param loreLines   optional lore lines. Supports "&amp;" color codes
      */
     public void give(Player player, int amount, String displayName, String... loreLines) {
         player.getInventory().addItem(new ItemStack[]{toItemStack(amount, displayName, loreLines)});
@@ -403,8 +384,7 @@ public enum HeadLib {
     /**
      * Returns an ItemStack of the size 1 of the custom head.
      *
-     * @return
-     * an ItemStack of the custom head.
+     * @return an ItemStack of the custom head.
      */
     public ItemStack toItemStack() {
         return toItemStack(1);
@@ -413,10 +393,8 @@ public enum HeadLib {
     /**
      * Returns an ItemStack of the custom head.
      *
-     * @param amount
-     * the amount of items in the stack
-     * @return
-     * an ItemStack of the custom head.
+     * @param amount the amount of items in the stack
+     * @return an ItemStack of the custom head.
      */
     public ItemStack toItemStack(int amount) {
         return toItemStack(amount, null);
@@ -425,12 +403,9 @@ public enum HeadLib {
     /**
      * Returns an ItemStack of the size 1 of the custom head.
      *
-     * @param displayName
-     * the name to display. Supports "&amp;" color codes
-     * @param loreLines
-     * optional lore lines. Supports "&amp;" color codes
-     * @return
-     * an ItemStack of the custom head.
+     * @param displayName the name to display. Supports "&amp;" color codes
+     * @param loreLines   optional lore lines. Supports "&amp;" color codes
+     * @return an ItemStack of the custom head.
      */
     public ItemStack toItemStack(String displayName, String... loreLines) {
         return toItemStack(1, displayName, loreLines);
@@ -439,14 +414,10 @@ public enum HeadLib {
     /**
      * Returns an ItemStack of the custom head.
      *
-     * @param amount
-     * the amount of items in the stack
-     * @param displayName
-     * the name to display. Supports "&amp;" color codes
-     * @param loreLines
-     * optional lore lines. Supports "&amp;" color codes
-     * @return
-     * an ItemStack of the custom head.
+     * @param amount      the amount of items in the stack
+     * @param displayName the name to display. Supports "&amp;" color codes
+     * @param loreLines   optional lore lines. Supports "&amp;" color codes
+     * @return an ItemStack of the custom head.
      */
     public ItemStack toItemStack(int amount, String displayName, String... loreLines) {
         ItemStack item = new ItemStack(Material.PLAYER_HEAD, amount);
@@ -462,11 +433,71 @@ public enum HeadLib {
             item.setItemMeta(meta);
         }
 
-        net.minecraft.server.v1_13_R2.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
-        NBTTagCompound compound = nmsStack.getTag() != null ? nmsStack.getTag() : new NBTTagCompound();
-        compound.set("SkullOwner", skullOwner);
-        nmsStack.setTag(compound);
-        return CraftItemStack.asBukkitCopy(nmsStack);
+        return internals.setSkullOwner(item, skullOwner);
+    }
+
+    static interface InternalsProvider {
+
+        String getTextureValue(ItemStack itemStack);
+
+        ItemStack setSkullOwner(ItemStack itemStack, Object compound);
+
+        Object createOwnerCompound(String id, String textureValue);
+
+    }
+
+    static InternalsProvider internals;
+
+    static {
+        String packageName = HeadLib.class.getPackage().getName();
+        String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+        try {
+            internals = (InternalsProvider) Class.forName(packageName + "." + internalsName).newInstance();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException exception) {
+            Bukkit.getLogger().log(Level.SEVERE, "ItemUtil could not find a valid implementation for " + internalsName + ".");
+        }
+    }
+
+    private static Object createOwnerCompound(String id, String textureValue) {
+        return internals.createOwnerCompound(id, textureValue);
+    }
+
+    /**
+     * Returns the Base64 encoded texture value if the ItemStack has one, or null if it does not
+     *
+     * @param item a Bukkit ItemStack, must be a head
+     * @return the Base64 encoded texture value if the ItemStack has one, or null if it does not
+     */
+    public static String getTextureValue(ItemStack item) {
+        return internals.getTextureValue(item);
+    }
+
+    /**
+     * Sets a Base64 encoded texture value to an ItemStack.
+     * <p>
+     * Returns a copy of the ItemStack with the UUID and texture value applied to it
+     *
+     * @param item         a Bukkit ItemStack
+     * @param id           the UUID of the SkullOwner
+     * @param textureValue the texture value
+     * @return a copy of the ItemStack with the UUID and texture value applied to it
+     */
+    public static ItemStack setSkullOwner(ItemStack item, UUID id, String textureValue) {
+        return setSkullOwner(item, id.toString(), textureValue);
+    }
+
+    /**
+     * Sets a Base64 encoded texture value to an ItemStack.
+     * <p>
+     * Returns a copy of the ItemStack with the UUID and texture value applied to it
+     *
+     * @param item         a Bukkit ItemStack
+     * @param id           the UUID of the SkullOwner
+     * @param textureValue the texture value
+     * @return a copy of the ItemStack with the UUID and texture value applied to it
+     */
+    public static ItemStack setSkullOwner(ItemStack item, String id, String textureValue) {
+        return internals.setSkullOwner(item, internals.createOwnerCompound(id, textureValue));
     }
 
 }
