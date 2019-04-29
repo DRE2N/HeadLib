@@ -1,5 +1,5 @@
 /*
- * Written in 2018 by Daniel Saukel
+ * Written from 2018-2019 by Daniel Saukel
  *
  * To the extent possible under law, the author(s) have dedicated all
  * copyright and related and neighboring rights to this software
