@@ -1,5 +1,5 @@
 ## Usage
-HeadLib is a library for CraftBukkit servers to create custom custom player heads
+HeadLib is a library for CraftBukkit servers to create custom player heads
 from Base64 encoded Strings. It contains hundreds of built-in heads.
 
 ### Code example
