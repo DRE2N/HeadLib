@@ -1,5 +1,5 @@
 /*
- * Written from 2018-2019 by Daniel Saukel
+ * Written from 2018-2020 by Daniel Saukel
  *
  * To the extent possible under law, the author(s) have dedicated all
  * copyright and related and neighboring rights to this software
@@ -19,7 +19,6 @@ import java.util.UUID;
 import java.util.logging.Level;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -445,7 +444,7 @@ public enum HeadLib {
      * @return an ItemStack of the custom head.
      */
     public ItemStack toItemStack(int amount, String displayName, String... loreLines) {
-        ItemStack item = new ItemStack(Material.PLAYER_HEAD, amount);
+        ItemStack item = internals.newPlayerHead(amount);
 
         if (displayName != null) {
             ItemMeta meta = item.getItemMeta();
@@ -462,6 +461,8 @@ public enum HeadLib {
     }
 
     static interface InternalsProvider {
+
+        ItemStack newPlayerHead(int amount);
 
         String getTextureValue(ItemStack itemStack);
 

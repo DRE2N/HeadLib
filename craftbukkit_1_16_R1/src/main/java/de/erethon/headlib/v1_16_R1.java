@@ -13,17 +13,17 @@
 package de.erethon.headlib;
 
 import de.erethon.headlib.HeadLib.InternalsProvider;
-import net.minecraft.server.v1_14_R1.NBTBase;
-import net.minecraft.server.v1_14_R1.NBTTagCompound;
-import net.minecraft.server.v1_14_R1.NBTTagList;
+import net.minecraft.server.v1_16_R1.NBTBase;
+import net.minecraft.server.v1_16_R1.NBTTagCompound;
+import net.minecraft.server.v1_16_R1.NBTTagList;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_14_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_16_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 
 /**
  * @author Daniel Saukel
  */
-class v1_14_R1 implements InternalsProvider {
+class v1_16_R1 implements InternalsProvider {
 
     @Override
     public ItemStack newPlayerHead(int amount) {
@@ -32,7 +32,7 @@ class v1_14_R1 implements InternalsProvider {
 
     @Override
     public String getTextureValue(ItemStack item) {
-        net.minecraft.server.v1_14_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+        net.minecraft.server.v1_16_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
 
         NBTTagCompound tag = nmsStack.getTag();
         if (tag == null) {
@@ -62,7 +62,7 @@ class v1_14_R1 implements InternalsProvider {
 
     @Override
     public ItemStack setSkullOwner(ItemStack item, Object compound) {
-        net.minecraft.server.v1_14_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+        net.minecraft.server.v1_16_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
         nmsStack.getOrCreateTag().set("SkullOwner", (NBTBase) compound);
         return CraftItemStack.asBukkitCopy(nmsStack);
     }

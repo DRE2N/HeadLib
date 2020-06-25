@@ -7,13 +7,13 @@
     <parent>
         <groupId>de.erethon</groupId>
         <artifactId>headlib-parent</artifactId>
-        <version>3.0.2</version>
+        <version>3.0.3</version>
     </parent>
     <dependencies>
         <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>craftbukkit</artifactId>
-            <version>1.15-R0.1-SNAPSHOT</version>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
+            <version>1.15.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

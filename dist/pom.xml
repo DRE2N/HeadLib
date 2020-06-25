@@ -7,7 +7,7 @@
     <parent>
         <groupId>de.erethon</groupId>
         <artifactId>headlib-parent</artifactId>
-        <version>3.0.2</version>
+        <version>3.0.3</version>
     </parent>
     <build>
         <directory>../target</directory>
@@ -15,7 +15,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>3.2.4</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -38,6 +38,11 @@
         <dependency>
             <groupId>de.erethon</groupId>
             <artifactId>headlib-core</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.erethon</groupId>
+            <artifactId>headlib-craftbukkit_1_16_R1</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>

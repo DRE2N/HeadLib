@@ -1,5 +1,5 @@
 /*
- * Written from 2018-2019 by Daniel Saukel
+ * Written from 2018-2020 by Daniel Saukel
  *
  * To the extent possible under law, the author(s) have dedicated all
  * copyright and related and neighboring rights to this software
@@ -16,6 +16,7 @@ import de.erethon.headlib.HeadLib.InternalsProvider;
 import net.minecraft.server.v1_13_R1.NBTBase;
 import net.minecraft.server.v1_13_R1.NBTTagCompound;
 import net.minecraft.server.v1_13_R1.NBTTagList;
+import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_13_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 
@@ -23,6 +24,11 @@ import org.bukkit.inventory.ItemStack;
  * @author Daniel Saukel
  */
 class v1_13_R1 implements InternalsProvider {
+
+    @Override
+    public ItemStack newPlayerHead(int amount) {
+        return new ItemStack(Material.PLAYER_HEAD, amount);
+    }
 
     @Override
     public String getTextureValue(ItemStack item) {
