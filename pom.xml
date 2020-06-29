@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.erethon</groupId>
     <artifactId>headlib-parent</artifactId>
-    <version>3.0.3</version>
+    <version>3.0.4</version>
     <packaging>pom</packaging>
     <name>HeadLib</name>
     <url>https://dre2n.github.io</url>
@@ -23,6 +23,7 @@
         <module>craftbukkit_1_8_R2</module>
         <module>craftbukkit_1_8_R1</module>
         <module>dist</module>
+        <module>plugin</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

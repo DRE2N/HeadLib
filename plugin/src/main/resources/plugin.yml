@@ -1,0 +1,13 @@
+name: HeadLib
+main: de.erethon.headlib.HeadLibPlugin
+version: ${project.version}
+author: Daniel Saukel
+description: ${project.description}
+website: ${project.url}
+commands:
+  headlib:
+    description: Gives a head to a player.
+    aliases: [givehead,gh]
+    permission: headlib.give
+    usage: "Usage: /<command> ([player name (=sender)]) (head:[head name]) (uuid:[owner UUID]) (textureValue:[texture value]) (amount:[amount]) (name and lore...)"
+api-version: 1.13
