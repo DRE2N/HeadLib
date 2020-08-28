@@ -8,7 +8,7 @@
     <parent>
         <groupId>de.erethon</groupId>
         <artifactId>headlib-parent</artifactId>
-        <version>3.0.4</version>
+        <version>3.0.5</version>
     </parent>
     <build>
         <resources>
