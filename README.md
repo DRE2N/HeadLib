@@ -50,7 +50,7 @@ Shading libraries can be done using Maven and its shade plugin:
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>3.2.4</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -72,7 +72,7 @@ Shading libraries can be done using Maven and its shade plugin:
 ```
 
 ## License
-Written from 2018-2020 by Daniel Saukel
+Written from 2018-2021 by Daniel Saukel
 
 To the extent possible under law, the author(s) have dedicated all
 copyright and related and neighboring rights to this software

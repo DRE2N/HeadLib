@@ -7,7 +7,7 @@
     <parent>
         <groupId>de.erethon</groupId>
         <artifactId>headlib-parent</artifactId>
-        <version>3.0.6</version>
+        <version>3.0.7</version>
     </parent>
     <build>
         <directory>../target</directory>
@@ -38,6 +38,11 @@
         <dependency>
             <groupId>de.erethon</groupId>
             <artifactId>headlib-core</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.erethon</groupId>
+            <artifactId>headlib-craftbukkit_1_17_R1</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
