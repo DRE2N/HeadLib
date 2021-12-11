@@ -12,6 +12,7 @@
  */
 package de.erethon.headlib;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.UUID;
 import java.util.logging.Level;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -478,9 +480,30 @@ public enum HeadLib {
         String packageName = HeadLib.class.getPackage().getName();
         String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
         try {
-            internals = (InternalsProvider) Class.forName(packageName + "." + internalsName).newInstance();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException exception) {
-            Bukkit.getLogger().log(Level.SEVERE, "HeadLib could not find a valid implementation for " + internalsName + ".");
+            internals = (InternalsProvider) Class.forName(packageName + "." + internalsName).getConstructor().newInstance();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException
+                | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException exception) {
+            Bukkit.getLogger().log(Level.SEVERE, "HeadLib could not find a valid implementation for {0}.", internalsName);
+        }
+        if (internals == null) {
+            internals = new InternalsProvider() {
+                @Override
+                public ItemStack newPlayerHead(int amount) {
+                    return new ItemStack(Material.PLAYER_HEAD, amount);
+                }
+                @Override
+                public String getTextureValue(ItemStack itemStack) {
+                    return "";
+                }
+                @Override
+                public ItemStack setSkullOwner(ItemStack itemStack, Object compound) {
+                    return itemStack.clone();
+                }
+                @Override
+                public Object createOwnerCompound(String id, String textureValue) {
+                    return null;
+                }
+            };
         }
     }
 
