@@ -480,7 +480,7 @@ public enum HeadLib {
         String packageName = HeadLib.class.getPackage().getName();
         String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
         try {
-            internals = (InternalsProvider) Class.forName(packageName + "." + internalsName).getConstructor().newInstance();
+            internals = (InternalsProvider) Class.forName(packageName + "." + internalsName).getDeclaredConstructor().newInstance();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException
                 | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException exception) {
             Bukkit.getLogger().log(Level.SEVERE, "HeadLib could not find a valid implementation for {0}.", internalsName);
