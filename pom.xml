@@ -2,13 +2,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.erethon</groupId>
     <artifactId>headlib-parent</artifactId>
-    <version>3.0.9</version>
+    <version>3.0.10</version>
     <packaging>pom</packaging>
     <name>HeadLib</name>
     <url>https://dre2n.github.io</url>
     <description>A library for custom heads.</description>
     <modules>
         <module>core</module>
+        <module>craftbukkit_1_18_R2</module>
         <module>craftbukkit_1_18_R1</module>
         <module>craftbukkit_1_17_R1</module>
         <module>craftbukkit_1_16_R3</module>
